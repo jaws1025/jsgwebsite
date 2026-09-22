@@ -135,6 +135,21 @@
   .band--cream { background: var(--surface-cream); }
   .band--muted { background: var(--surface-muted); }
 
+  /* Section seams: every band boundary gets a hairline so transitions read as
+     intentional rhythm rather than abrupt color jumps, regardless of whether
+     the adjacent bands share a tone. */
+  .hero + .trusted,
+  .section + .section,
+  .trusted + .section,
+  .section + .trusted {
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .hero + .trusted,
+  .band--navy + .section:not(.band--navy),
+  .section:not(.band--navy) + .band--navy {
+    border-top-color: rgba(255,255,255,.12);
+  }
+
   .eyebrow {
     font-family: var(--font-mono);
     font-size: .75rem;
@@ -311,27 +326,24 @@
   .stepc p { color: var(--on-navy-dim); font-size: .92rem; }
 
   /* ===== Roles / disciplines (on navy) ===== */
-  .disc { border-top: 1px solid rgba(255,255,255,.14); padding-top: clamp(1.25rem, 3vw, 1.75rem); margin-top: clamp(1.25rem, 3vw, 1.75rem); }
-  .disc__head { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .disc { border-top: 1px solid rgba(255,255,255,.14); padding-top: clamp(1.75rem, 4vw, 2.5rem); margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+  .disc__head { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
   .disc__head h3 { color: #fff; font-size: clamp(1.15rem, 2.4vw, 1.55rem); text-transform: uppercase; letter-spacing: -0.01em; }
   .badge {
     font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
     color: var(--sky); border: 1px solid rgba(201,161,90,.4); border-radius: var(--radius-pill); padding: .25rem .65rem;
   }
   .badge--primary { background: var(--sky); color: var(--navy); border-color: var(--sky); font-weight: 700; }
-  .rolegroups { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 4vw, 2.75rem); }
-  @media (max-width: 820px) { .rolegroups { grid-template-columns: 1fr; } }
-  .rolegroup h4 span { color: var(--on-navy-dim); text-transform: none; letter-spacing: normal; font-family: var(--font-sans); }
-  .rolegroup h4 { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; color: var(--sky); margin-bottom: .95rem; }
+  /* Flat, single chip list per practice. Leadership titles live in the same
+     row, set apart only by a gold outline, so the list scans as one clean
+     set of roles rather than nested sub-grids. */
   .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
   .chip-role {
     font-size: .82rem; color: #fff;
     background: var(--navy-2); border: 1px solid rgba(255,255,255,.14);
     border-radius: var(--radius-pill); padding: .42rem .85rem; white-space: nowrap;
   }
-  .rolegroup--lead { padding-top: 1.1rem; border-top: 1px solid rgba(201,161,90,.25); }
-  .rolegroup--lead h4 { color: var(--pink); }
-  .rolegroup--lead .chip-role { border-color: rgba(201,161,90,.4); }
+  .chip-role--lead { border-color: rgba(201,161,90,.55); color: var(--tan); }
 
   /* ===== Our Why (cream) ===== */
   .why { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
@@ -504,7 +516,7 @@
       <div class="hero__inner">
         <p class="hero__eyebrow">Boutique, Founder-Led Search</p>
         <h1>We find the talent that <span class="u">drives impact.</span></h1>
-        <p class="hero__lede">A boutique, founder-led search firm placing construction &amp; manufacturing talent. Boston-based. Trusted nationally.</p>
+        <p class="hero__lede">A boutique, founder-led search firm placing construction, manufacturing, technical sales, and finance &amp; accounting talent. Boston-based. Trusted nationally.</p>
         <div class="hero__specs">
           <span>Construction</span>
           <span>Manufacturing &amp; Plant Management</span>
@@ -578,11 +590,11 @@
       </div>
 
       <h3 class="subhead reveal" style="margin-top:clamp(2.75rem,6vw,4.5rem)">What you get</h3>
-      <div class="grid grid--3 reveal">
+      <div class="grid grid--2 reveal">
         <div class="card appr">
           <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-          <h3>Transparent communication</h3>
-          <p>Consistent updates on the market and the search. You always know where things stand.</p>
+          <h3>Direct, honest communication</h3>
+          <p>Consistent updates on the market and the search, and real feedback after every interview from both sides. No phantom roles, no surprises.</p>
         </div>
         <div class="card appr">
           <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
@@ -590,19 +602,9 @@
           <p>Every submission is vetted and intentional, and worth the time it takes to review.</p>
         </div>
         <div class="card appr">
-          <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
-          <h3>Real, direct feedback</h3>
-          <p>After every interview, both sides hear what actually happened. No phantom roles.</p>
-        </div>
-        <div class="card appr">
-          <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-3 6-3-6 3-1z"/></svg></span>
-          <h3>Rooted expertise</h3>
-          <p>Deep relationships across manufacturing and construction companies. We know the seats, the plant floor, and the jobsite.</p>
-        </div>
-        <div class="card appr">
           <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-          <h3>Founder-led</h3>
-          <p>You work directly with the person doing the search. Not a name on the proposal and a handoff to a junior.</p>
+          <h3>Founder-led, rooted in the industry</h3>
+          <p>You work directly with the person doing the search, not a handoff to a junior. Deep relationships across manufacturing and construction, from the plant floor to the jobsite.</p>
         </div>
         <div class="card appr">
           <span class="ico ico--round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-4"/><circle cx="12" cy="14" r="4"/><path d="m5 5 2 2M19 5l-2 2"/></svg></span>
@@ -673,25 +675,15 @@
           <h3>Construction</h3>
           <span class="badge">PM, precon, sales &amp; engineering</span>
         </div>
-        <div class="rolegroups">
-          <div class="rolegroup">
-            <h4>PM &amp; Field</h4>
-            <div class="chips">
-              <span class="chip-role">Project Engineer</span>
-              <span class="chip-role">Civil Engineer</span>
-              <span class="chip-role">Structural Engineer</span>
-              <span class="chip-role">Project Manager</span>
-              <span class="chip-role">Superintendent</span>
-              <span class="chip-role">Estimator</span>
-            </div>
-          </div>
-          <div class="rolegroup rolegroup--lead">
-            <h4>Leadership</h4>
-            <div class="chips">
-              <span class="chip-role">Director of Construction</span>
-              <span class="chip-role">VP of Construction</span>
-            </div>
-          </div>
+        <div class="chips">
+          <span class="chip-role">Project Engineer</span>
+          <span class="chip-role">Civil Engineer</span>
+          <span class="chip-role">Structural Engineer</span>
+          <span class="chip-role">Project Manager</span>
+          <span class="chip-role">Superintendent</span>
+          <span class="chip-role">Estimator</span>
+          <span class="chip-role chip-role--lead">Director of Construction</span>
+          <span class="chip-role chip-role--lead">VP of Construction</span>
         </div>
       </div>
 
@@ -700,26 +692,16 @@
           <h3>Manufacturing &amp; Plant Management</h3>
           <span class="badge">Operations, engineering &amp; quality</span>
         </div>
-        <div class="rolegroups">
-          <div class="rolegroup">
-            <h4>Plant &amp; Engineering</h4>
-            <div class="chips">
-              <span class="chip-role">Plant Manager</span>
-              <span class="chip-role">Production Manager</span>
-              <span class="chip-role">Manufacturing Engineer</span>
-              <span class="chip-role">Mechanical Engineer</span>
-              <span class="chip-role">Electrical Engineer</span>
-              <span class="chip-role">Quality Manager</span>
-            </div>
-          </div>
-          <div class="rolegroup rolegroup--lead">
-            <h4>Leadership</h4>
-            <div class="chips">
-              <span class="chip-role">Director of Operations</span>
-              <span class="chip-role">VP of Operations</span>
-              <span class="chip-role">VP of Manufacturing</span>
-            </div>
-          </div>
+        <div class="chips">
+          <span class="chip-role">Plant Manager</span>
+          <span class="chip-role">Production Manager</span>
+          <span class="chip-role">Manufacturing Engineer</span>
+          <span class="chip-role">Mechanical Engineer</span>
+          <span class="chip-role">Electrical Engineer</span>
+          <span class="chip-role">Quality Manager</span>
+          <span class="chip-role chip-role--lead">Director of Operations</span>
+          <span class="chip-role chip-role--lead">VP of Operations</span>
+          <span class="chip-role chip-role--lead">VP of Manufacturing</span>
         </div>
       </div>
 
@@ -728,23 +710,13 @@
           <h3>Technical Sales</h3>
           <span class="badge">Sales engineers &amp; technical BD</span>
         </div>
-        <div class="rolegroups">
-          <div class="rolegroup">
-            <h4>Sales &amp; Accounts</h4>
-            <div class="chips">
-              <span class="chip-role">Sales Engineer</span>
-              <span class="chip-role">Application Engineer</span>
-              <span class="chip-role">Territory Sales Manager</span>
-              <span class="chip-role">Account Manager</span>
-            </div>
-          </div>
-          <div class="rolegroup rolegroup--lead">
-            <h4>Leadership</h4>
-            <div class="chips">
-              <span class="chip-role">Director of Sales</span>
-              <span class="chip-role">VP of Sales</span>
-            </div>
-          </div>
+        <div class="chips">
+          <span class="chip-role">Sales Engineer</span>
+          <span class="chip-role">Application Engineer</span>
+          <span class="chip-role">Territory Sales Manager</span>
+          <span class="chip-role">Account Manager</span>
+          <span class="chip-role chip-role--lead">Director of Sales</span>
+          <span class="chip-role chip-role--lead">VP of Sales</span>
         </div>
       </div>
 
@@ -753,42 +725,25 @@
           <h3>Finance &amp; Accounting</h3>
           <span class="badge">Senior level and above</span>
         </div>
-        <div class="rolegroups">
-          <div class="rolegroup">
-            <h4>Accounting &amp; Finance</h4>
-            <div class="chips">
-              <span class="chip-role">Senior Accountant</span>
-              <span class="chip-role">Accounting Manager</span>
-              <span class="chip-role">FP&amp;A Manager</span>
-              <span class="chip-role">Controller</span>
-            </div>
-          </div>
-          <div class="rolegroup rolegroup--lead">
-            <h4>Leadership</h4>
-            <div class="chips">
-              <span class="chip-role">Director of Finance</span>
-              <span class="chip-role">VP of Finance</span>
-            </div>
-          </div>
+        <div class="chips">
+          <span class="chip-role">Senior Accountant</span>
+          <span class="chip-role">Accounting Manager</span>
+          <span class="chip-role">FP&amp;A Manager</span>
+          <span class="chip-role">Controller</span>
+          <span class="chip-role chip-role--lead">Director of Finance</span>
+          <span class="chip-role chip-role--lead">VP of Finance</span>
         </div>
       </div>
 
-      <div class="disc reveal disc--csuite">
+      <div class="disc reveal">
         <div class="disc__head">
           <h3>C-Suite</h3>
           <span class="badge">Across all practices</span>
         </div>
-        <div class="rolegroups">
-          <div class="rolegroup rolegroup--lead">
-            <h4>Executive Leadership</h4>
-            <div class="chips">
-              <span class="chip-role">COO</span>
-              <span class="chip-role">CEO</span>
-              <span class="chip-role">CFO</span>
-              <span class="chip-role">CHRO</span>
-              <span class="chip-role">CRO</span>
-            </div>
-          </div>
+        <div class="chips">
+          <span class="chip-role chip-role--lead">COO</span>
+          <span class="chip-role chip-role--lead">CEO</span>
+          <span class="chip-role chip-role--lead">CFO</span>
         </div>
       </div>
 
@@ -899,7 +854,7 @@
         <a class="brand" href="#top" aria-label="Jasurda Search Group, home">
           <img class="brand__logo brand__logo--footer" src="data:image/svg+xml;base64,CiAgICAgICAgPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIzMTcxLjQyODU3MTQyODU3MTYiIGhlaWdodD0iMjg5My4zNzk0NDU2NTQ3MDkiIHZpZXdCb3g9IjAgMCAzMTcxLjQyODU3MTQyODU3MTYgMjg5My4zNzk0NDU2NTQ3MDkiPgoJCQkKCQkJPGcgdHJhbnNmb3JtPSJzY2FsZSg4LjU3MTQyODU3MTQyODU3MSkgdHJhbnNsYXRlKDEwLCAxMCkiPgoJCQkJPGRlZnMgaWQ9IlN2Z2pzRGVmczEwMDEiLz48ZyBpZD0iU3ZnanNHMTAwNyIgZmVhdHVyZUtleT0ic3ltYm9sRmVhdHVyZS0wIiB0cmFuc2Zvcm09Im1hdHJpeCgyLjE3NzkxNzAyODgyMDQ0NjQsMCwwLDIuMTc3OTE3MDI4ODIwNDQ2NCw2Ny44ODI1NzkzOTExOTgwNSwtMTUuMDU1OTQwNjUyODYyMzgpIiBmaWxsPSIjZmZmIj48ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik01MC45NCwyNy45NDZjMS42NzEsMy4xOTIsMi42MTcsNi44MTksMi42MTcsMTAuNjY0YzAsMS43OTgtMC4yMDcsMy41NDgtMC41OTgsNS4yMjggICBjNC4wMjgtMy40MjcsOS4yNDMtNS40OTgsMTQuOTM0LTUuNDk4YzAuMDUxLDAsMC4xMDEsMC4wMDEsMC4xNTEsMC4wMDJjMS43NTMtMy4wNjksMi43NTctNi42MTksMi43NTctMTAuMzk5ICAgYzAtMy40MzktMC44My02LjY4OC0yLjMtOS41NTZDNjEuMTU4LDE4LjQwNyw1NC42ODgsMjIuMjEsNTAuOTQsMjcuOTQ2eiIvPjxwYXRoIGQ9Ik00OS43OTYsMjUuOTk5YzMuOTY3LTUuNTMsMTAuMzEyLTkuMjQyLDE3LjUyOC05LjYyNWMtMy43NjctNS42OTYtMTAuMjI4LTkuNDYxLTE3LjU1My05LjQ2MSAgIGMtNy4wMDcsMC0xMy4yMjQsMy40NDYtMTcuMDQ4LDguNzMxQzM5Ljg2MiwxNi4zMzUsNDYuMDU4LDIwLjI5Miw0OS43OTYsMjUuOTk5eiIvPjxwYXRoIGQ9Ik02OC4xODQsNjIuNDg2Yy01Ljg3LTAuMDk0LTExLjIxNC0yLjM5LTE1LjI0MS02LjA5OGMwLjI2MiwxLjM4NywwLjQsMi44MTcsMC40LDQuMjc5YzAsNC4zMzYtMS4yMDMsOC4zOTYtMy4yOTIsMTEuODY2ICAgYzMuNjQ2LDUuODMsMTAuMDY3LDkuNzU0LDE3LjM5OSw5LjkwNmMxLjg0NS0zLjEyNywyLjkwNS02Ljc2OSwyLjkwNS0xMC42NTNDNzAuMzU1LDY4LjQ0OSw2OS41NzMsNjUuMjkzLDY4LjE4NCw2Mi40ODZ6Ii8+PHBhdGggZD0iTTcwLjQxMSw2Mi40MThjMS4yNzgsMi44NjQsMS45OSw2LjAzNSwxLjk5LDkuMzY5YzAsMy44MDYtMC45MjgsNy40LTIuNTY2LDEwLjU2OCAgIGMxMC42ODgtMC45ODMsMTkuMDg4LTkuOTk4LDE5LjA4OC0yMC45MzljMC0yLjk3OS0wLjYyNC01LjgxNC0xLjc0Ni04LjM4NUM4My4zMTgsNTguMjk1LDc3LjI4NSw2MS44NjksNzAuNDExLDYyLjQxOHoiLz48cGF0aCBkPSJNNzAuMzA1LDM4LjQ2NmM3LjEyNiwwLjc0NCwxMy4yOTksNC43NDQsMTYuOTk3LDEwLjQ4MmMxLjQ2Mi0yLjg2MywyLjI4Ny02LjEwMywyLjI4Ny05LjUzMSAgIGMwLTEwLjgyOS04LjIyOC0xOS43NzEtMTguNzYtMjAuOTA3YzEuMjk2LDIuODgxLDIuMDE4LDYuMDc1LDIuMDE4LDkuNDM0QzcyLjg0NywzMS43MzEsNzEuOTI5LDM1LjMwOSw3MC4zMDUsMzguNDY2eiIvPjxwYXRoIGQ9Ik00OC44MTMsNzQuMzgxYy0zLjg4Niw1LjI0Mi05LjkzOCw4Ljc4Ny0xNi44MjIsOS4yOTljMy43OTUsNS41MTQsMTAuMTQ5LDkuMTM3LDE3LjMzNCw5LjEzNyAgIGM2Ljg1NywwLDEyLjk1Ny0zLjI5OSwxNi43OTktOC4zOTNDNTguOTM3LDgzLjg3Nyw1Mi42NTksODAuMDIxLDQ4LjgxMyw3NC4zODF6Ii8+PHBhdGggZD0iTTI4LjgzNSwzNy42MzljLTEuMzcyLTIuOTUtMi4xMzktNi4yMzQtMi4xMzktOS42OTVjMC0zLjcwNywwLjg4LTcuMjExLDIuNDQtMTAuMzE4ICAgQzE4LjE2NSwxOC4zMjIsOS40NTMsMjcuNDY3LDkuNDUzLDM4LjYxYzAsMy4xNDIsMC42OTQsNi4xMjUsMS45MzUsOC44MDVDMTUuMzA5LDQxLjg0NiwyMS42MywzOC4wODIsMjguODM1LDM3LjYzOXoiLz48cGF0aCBkPSJNNjkuMTcxLDQwLjQyNmMtMi44ODEsNC40NjItNy4yNTksNy44NzEtMTIuNDE4LDkuNTEyYzUuMzg3LDEuODM2LDkuODgzLDUuNjEyLDEyLjY1MiwxMC40OSAgIGM2Ljk4Ny0wLjI3NywxMy4xMDgtMy45OCwxNi43MjctOS40NzNDODIuNjk4LDQ0Ljk5Miw3Ni40MjUsNDAuODYzLDY5LjE3MSw0MC40MjZ6Ii8+PHBhdGggZD0iTTI4LjYxOSw2MS42MWMtNy4xODQtMC41NzctMTMuNDUtNC40NTctMTcuMjcyLTEwLjExN2MtMS4zNTEsMi43NzQtMi4xMSw1Ljg4OC0yLjExLDkuMTc1ICAgYzAsMTAuOTg1LDguNDY2LDIwLjAyOCwxOS4yMTYsMjAuOTUxYy0xLjQxMi0yLjk4NC0yLjIwMy02LjMxNy0yLjIwMy05LjgzMkMyNi4yNSw2OC4xMzcsMjcuMTA0LDY0LjY4MiwyOC42MTksNjEuNjF6Ii8+PHBhdGggZD0iTTQ3LjY1Miw3Mi40ODdjLTEuODA2LTMuMjg4LTIuODM1LTcuMDYyLTIuODM1LTExLjA3MWMwLTEuNzk4LDAuMjA3LTMuNTQ4LDAuNTk4LTUuMjI5ICAgYy0zLjkzMiwzLjM0Ni04Ljk5NSw1LjM5Ny0xNC41MjcsNS40OTRjLTEuNjUxLDMtMi41OTIsNi40NDQtMi41OTIsMTAuMTA1YzAsMy41NzksMC44OTksNi45NTEsMi40ODMsOS45MDUgICBDMzcuNzg2LDgxLjUyMyw0My45NTMsNzcuOTExLDQ3LjY1Miw3Mi40ODd6Ii8+PHBhdGggZD0iTTMxLjA5OSwzNy42MDljNS42OTEsMC4yMDMsMTAuODYyLDIuNDc2LDE0Ljc4NCw2LjA4N2MtMC4yNjEtMS4zODctMC4zOTktMi44MTgtMC4zOTktNC4yOCAgIGMwLTQuMTkzLDEuMTI1LTguMTI4LDMuMDg4LTExLjUyMWMtMy41MTItNS45MDctOS44MzMtOS45NTYtMTcuMTA3LTEwLjI5MmMtMS43MzIsMy4wNTUtMi43MjMsNi41ODMtMi43MjMsMTAuMzM5ICAgQzI4Ljc0MiwzMS40MjYsMjkuNTk0LDM0LjcxNCwzMS4wOTksMzcuNjA5eiIvPjxwYXRoIGQ9Ik00Ny4xNDksNTAuODY5Yy02LjE0MywwLjYzNC0xMS41MSwzLjkyNC0xNC45Myw4LjY5OWM1Ljk5MS0wLjQ5MiwxMS4yNzktMy41MDYsMTQuNzk2LTcuOTc1ICAgYzAuMTEtMC4yMzUsMC4yMjYtMC40NywwLjM0NS0wLjcwMUM0Ny4yOSw1MC44ODUsNDcuMjIsNTAuODc3LDQ3LjE0OSw1MC44Njl6Ii8+PHBhdGggZD0iTTQ3LjI2Myw0OC4yOThjLTMuNDM4LTQuNzEtOC43ODMtNy45NDQtMTQuODktOC41NTRjMy4zMjYsNC44ODgsOC42NTYsOC4zMDgsMTQuOCw5LjA2OSAgIGMwLjEtMC4wMDksMC4xOTktMC4wMTksMC4zMDEtMC4wMjdDNDcuNDAxLDQ4LjYyNCw0Ny4zMzEsNDguNDYxLDQ3LjI2Myw0OC4yOTh6Ii8+PHBhdGggZD0iTTQ5LjYwMSw0Ny4zNjdjMS4yMjctMi42NjgsMS45MTItNS42MzMsMS45MTItOC43NTZjMC0zLjAyOC0wLjY0NS01LjkwOS0xLjgwMy04LjUxMyAgIGMtMS4zOTUsMi44MTEtMi4xODEsNS45NzQtMi4xODEsOS4zMTljMCwyLjc4NSwwLjU0Niw1LjQ0NCwxLjUzMiw3Ljg3OWMwLjA5NywwLjEzNSwwLjE5MSwwLjI3MSwwLjI4NCwwLjQwNyAgIEM0OS40MjksNDcuNTksNDkuNTE1LDQ3LjQ3OCw0OS42MDEsNDcuMzY3eiIvPjxwYXRoIGQ9Ik0yOS43MjQsNTkuNjI1YzIuODc2LTQuNjE5LDcuMzM4LTguMTUyLDEyLjYyLTkuODMzYy01LjI2LTEuNzkzLTkuNjctNS40MzYtMTIuNDU0LTEwLjE0OSAgIGMtNy4zMjQsMC4xMjktMTMuNzQ3LDQuMDIxLTE3LjQxMyw5LjgyM0MxNi4wNDIsNTUuMzU1LDIyLjQxMyw1OS4zNjQsMjkuNzI0LDU5LjYyNXoiLz48cGF0aCBkPSJNNTEuOTQ3LDQ4Ljg2MWM2LjAzMi0wLjYyMywxMS4zMTMtMy44MDYsMTQuNzQxLTguNDRjLTYuMjA5LDAuMzUzLTExLjcwNywzLjQxLTE1LjMyOCw4LjAxMiAgIGMtMC4wNTcsMC4xMTktMC4xMTMsMC4yMzctMC4xNzIsMC4zNTRDNTEuNDQyLDQ4LjgwNyw1MS42OTYsNDguODMzLDUxLjk0Nyw0OC44NjF6Ii8+PHBhdGggZD0iTTUxLjU2Myw1MS43ODdjMy41MzksNC44NDgsOS4wOTcsOC4xMzIsMTUuNDI3LDguNjAyYy0zLjMwNC01LjEwNC04Ljc1Ni04LjY5LTE1LjA2NS05LjQ3MiAgIGMtMC4yNCwwLjAyMi0wLjQ4LDAuMDQxLTAuNzIyLDAuMDU2QzUxLjMyOCw1MS4yNDEsNTEuNDQ4LDUxLjUxMyw1MS41NjMsNTEuNzg3eiIvPjxwYXRoIGQ9Ik00OC43NzQsNTIuNjZjLTEuMjI3LDIuNjY3LTEuOTExLDUuNjMzLTEuOTExLDguNzU2YzAsMy4yMjEsMC43MjksNi4yNzUsMi4wMjksOS4wMDhjMS41MzQtMi45MTgsMi40MDMtNi4yMzYsMi40MDMtOS43NTYgICBjMC0yLjc4NS0wLjU0NS01LjQ0NC0xLjUzMy03Ljg3OWMtMC4xNzgtMC4yNS0wLjM1LTAuNTA0LTAuNTE4LTAuNzYxQzQ5LjA5Miw1Mi4yNDIsNDguOTM1LDUyLjQ1MSw0OC43NzQsNTIuNjZ6Ii8+PC9nPjwvZz48ZyBpZD0iU3ZnanNHMTAwOCIgZmVhdHVyZUtleT0ibmFtZUZlYXR1cmUtMCIgdHJhbnNmb3JtPSJtYXRyaXgoMC45OTAxMDk5NTA4MjYwMTI1LDAsMCwwLjk5MDEwOTk1MDgyNjAxMjUsLTAuNDgzNDUyMTI0NDI2NzYzOTQsMTk1LjI0MjQ0NDMzMzk0MTEpIiBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTEuNTIzNDM4IDEyLjA3MDMxMyBsMCAxOS44ODI4MTMgYzAgNS4zNjQ1OSAtMy42NzgzNzkgOC4wNDY4NzUgLTExLjAzNTE1NiA4LjA0Njg3NSBsMCAtNC40OTIxODcgYzMuOTA2MjUgMCA1Ljg1OTM3NSAtMS4xODQ5MDIgNS44NTkzNzUgLTMuNTU0Njg3IGwwIC0xOS44ODI4MTIgbDUuMTc1NzgxIDAgeiBNMjAuMjUzOTA2IDQwIGwtNS4zMTI1IDAgbDExLjg1NTQ2OSAtMjcuOTI5Njg3IGw1LjU2NjQwNiAwIGwxMi4xMDkzNzUgMjcuOTI5Njg4IGwtNS41NjY0MDYgMCBsLTMuMTgzNTk0IC03LjYxNzE4NyBsLTkuMjc3MzQ0IDAgbDEuNzc3MzQ0IC00LjQ5MjE4NyBsNS42MjUgMCBsLTQuMzk0NTMxIC0xMC40ODgyODEgeiBNNDcuNDAyMzQ0IDM4LjgyODEyNSBsMCAtNC42ODc1IGMyLjc5OTQ3MyAxLjA0MTY2IDUuOTYzNTM1IDEuNTYyNSA5LjQ5MjE4OCAxLjU2MjUgYzQuMjgzODQ4IDAgNi40MjU3ODEgLTEuNDMyMjg1IDYuNDI1NzgxIC00LjI5Njg3NSBjMCAtMi4wODMzNCAtMS4zMTUwOTggLTMuMTI1IC0zLjk0NTMxMiAtMy4xMjUgbC00LjM3NSAwIGMtNS43MTYxNTIgMCAtOC41NzQyMTkgLTIuNjA0MTYgLTguNTc0MjE5IC03LjgxMjUgYzAgLTUuNzI5MTYgNC4wNjkwMDQgLTguNTkzNzUgMTIuMjA3MDMxIC04LjU5Mzc1IGMzLjEyNSAwIDYuMDg3MjQ2IDAuNDU1NzIzIDguODg2NzE5IDEuMzY3MTg4IGwwIDQuNjg3NSBjLTIuNzk5NDczIC0xLjA0MTY2IC01Ljc2MTcxOSAtMS41NjI1IC04Ljg4NjcxOSAtMS41NjI1IGMtNC42ODc1IDAgLTcuMDMxMjUgMS4zNjcxODggLTcuMDMxMjUgNC4xMDE1NjMgYzAgMi4wODMzNCAxLjEzMjgxMyAzLjEyNSAzLjM5ODQzOCAzLjEyNSBsNC4zNzUgMCBjNi4wODA3MjMgMCA5LjEyMTA5NCAyLjYwNDE2IDkuMTIxMDk0IDcuODEyNSBjMCA1Ljg1OTM3NSAtMy44NjcxODcgOC43ODkwNjMgLTExLjYwMTU2MiA4Ljc4OTA2MyBjLTMuNTI4NjUyIDAgLTYuNjkyNzE1IC0wLjQ1NTcyMyAtOS40OTIxODcgLTEuMzY3MTg3IHogTTcyLjg5MDYyNiAyOS4wMjM0MzggbDAgLTE2Ljk1MzEyNSBsNS4xNzU3ODEgMCBsMCAxNi45NTMxMjUgYzAgNC40NTMxMjUgMi4yNzg2NTIgNi42Nzk2ODggNi44MzU5MzggNi42Nzk2ODggczYuODM1OTM4IC0yLjIyNjU2MiA2LjgzNTkzOCAtNi42Nzk2ODcgbDAgLTE2Ljk1MzEyNSBsNS4xNzU3ODEgMCBsMCAxNi45NTMxMjUgYzAgNy40NDc5MSAtNC4wMDM5MDYgMTEuMTcxODc1IC0xMi4wMTE3MTkgMTEuMTcxODc1IHMtMTIuMDExNzE5IC0zLjcyMzk2NSAtMTIuMDExNzE5IC0xMS4xNzE4NzUgeiBNMTAyLjc3MzQzOCAzOS45NjA5MzggbDAgLTI3Ljg5MDYyNSBsMTIuNjk1MzEzIDAgYzUuNzAzMTI1IDAgOC41NTQ2ODggMi40OTM0OTYgOC41NTQ2ODggNy40ODA0NjkgYzAgMy4zNzI0MDIgLTIuMjIwMDU5IDYuMTY1MzcxIC02LjY2MDE1NiA4LjM3ODkwNiBsOC44NDc2NTYgMTIuMDcwMzEzIGwtNi41MjM0MzcgMCBsLTguNDk2MDk0IC0xMi4xNjc5NjkgbDAgLTIuMzYzMjgxIGM0Ljk0NzkxIC0wLjg0NjM0OCA3LjQyMTg3NSAtMi43NjY5MTQgNy40MjE4NzUgLTUuNzYxNjk5IGMwIC0yLjA1NzI4NSAtMS4xNTg4NDggLTMuMDg1OTM3IC0zLjQ3NjU2MiAtMy4wODU5MzcgbC03LjA4OTg0NCAwIGwwIDIzLjMzOTg0NCBsLTUuMjczNDM3IDAgeiBNMTM5LjU4OTg0NCAzNS41MDc4MTMgYzUuNzk0Mjc3IDAgOC42OTE0MDYgLTMuNDExNDY1IDguNjkxNDA2IC0xMC4yMzQzNzUgYzAgLTUuODA3Mjg1IC0yLjg5NzEyOSAtOC43MTA5MzcgLTguNjkxNDA2IC04LjcxMDkzNyBsLTUuNzYxNzE5IDAgbDAgMTguOTQ1MzEzIGw1Ljc2MTcxOSAwIHogTTEyOC42NTIzNDQgNDAgbDAgLTI3LjkyOTY4NyBsMTAuOTM3NSAwIGM5LjI0NDc4NSAwIDEzLjg2NzE4OCA0LjQwMTAzNSAxMy44NjcxODggMTMuMjAzMTI1IGMwIDkuODE3NzE1IC00LjYyMjQwMiAxNC43MjY1NjMgLTEzLjg2NzE4NyAxNC43MjY1NjMgbC0xMC45Mzc1IDAgeiBNMTYwLjcyMjY1NiA0MCBsLTUuMzEyNSAwIGwxMS44NTU0NjkgLTI3LjkyOTY4NyBsNS41NjY0MDYgMCBsMTIuMTA5Mzc1IDI3LjkyOTY4OCBsLTUuNTY2NDA2IDAgbC0zLjE4MzU5NCAtNy42MTcxODcgbC05LjI3NzM0NCAwIGwxLjc3NzM0NCAtNC40OTIxODcgbDUuNjI1IDAgbC00LjM5NDUzMSAtMTAuNDg4MjgxIHogTTE5Ni42NjAxNTYgMzguODI4MTI1IGwwIC00LjY4NzUgYzIuNzk5NDczIDEuMDQxNjYgNS45NjM1MzUgMS41NjI1IDkuNDkyMTg4IDEuNTYyNSBjNC4yODM4NDggMCA2LjQyNTc4MSAtMS40MzIyODUgNi40MjU3ODEgLTQuMjk2ODc1IGMwIC0yLjA4MzM0IC0xLjMxNTA5OCAtMy4xMjUgLTMuOTQ1MzEyIC0zLjEyNSBsLTQuMzc1IDAgYy01LjcxNjE1MiAwIC04LjU3NDIxOSAtMi42MDQxNiAtOC41NzQyMTkgLTcuODEyNSBjMCAtNS43MjkxNiA0LjA2OTAwNCAtOC41OTM3NSAxMi4yMDcwMzEgLTguNTkzNzUgYzMuMTI1IDAgNi4wODcyNDYgMC40NTU3MjMgOC44ODY3MTkgMS4zNjcxODggbDAgNC42ODc1IGMtMi43OTk0NzMgLTEuMDQxNjYgLTUuNzYxNzE5IC0xLjU2MjUgLTguODg2NzE5IC0xLjU2MjUgYy00LjY4NzUgMCAtNy4wMzEyNSAxLjM2NzE4OCAtNy4wMzEyNSA0LjEwMTU2MyBjMCAyLjA4MzM0IDEuMTMyODEzIDMuMTI1IDMuMzk4NDM4IDMuMTI1IGw0LjM3NSAwIGM2LjA4MDcyMyAwIDkuMTIxMDk0IDIuNjA0MTYgOS4xMjEwOTQgNy44MTI1IGMwIDUuODU5Mzc1IC0zLjg2NzE4NyA4Ljc4OTA2MyAtMTEuNjAxNTYyIDguNzg5MDYzIGMtMy41Mjg2NTIgMCAtNi42OTI3MTUgLTAuNDU1NzIzIC05LjQ5MjE4NyAtMS4zNjcxODcgeiBNMjQxLjI2OTUzMSAxMi4wNzAzMTMgbDAgNC40NTMxMjUgbC0xMy45ODQzNzUgMCBsMCA3LjAzMTI1IGwxMy4zMjAzMTMgMCBsMCA0LjYyODkwNiBsLTEzLjM3ODkwNiAwIGwwIDcuMzI0MjE5IGwxNC4zMTY0MDYgMCBsMCA0LjQ5MjE4OCBsLTE5LjM5NDUzMSAwIGwwIC0yNy45Mjk2ODcgbDE5LjEyMTA5NCAwIHogTTI0OS4xOTkyMTkgNDAgbC01LjMxMjUgMCBsMTEuODU1NDY5IC0yNy45Mjk2ODcgbDUuNTY2NDA2IDAgbDEyLjEwOTM3NSAyNy45Mjk2ODggbC01LjU2NjQwNiAwIGwtMy4xODM1OTQgLTcuNjE3MTg3IGwtOS4yNzczNDQgMCBsMS43NzczNDQgLTQuNDkyMTg3IGw1LjYyNSAwIGwtNC4zOTQ1MzEgLTEwLjQ4ODI4MSB6IE0yNzYuODM1OTM4IDM5Ljk2MDkzOCBsMCAtMjcuODkwNjI1IGwxMi42OTUzMTMgMCBjNS43MDMxMjUgMCA4LjU1NDY4OCAyLjQ5MzQ5NiA4LjU1NDY4OCA3LjQ4MDQ2OSBjMCAzLjM3MjQwMiAtMi4yMjAwNTkgNi4xNjUzNzEgLTYuNjYwMTU2IDguMzc4OTA2IGw4Ljg0NzY1NiAxMi4wNzAzMTMgbC02LjUyMzQzNyAwIGwtOC40OTYwOTQgLTEyLjE2Nzk2OSBsMCAtMi4zNjMyODEgYzQuOTQ3OTEgLTAuODQ2MzQ4IDcuNDIxODc1IC0yLjc2NjkxNCA3LjQyMTg3NSAtNS43NjE2OTkgYzAgLTIuMDU3Mjg1IC0xLjE1ODg0OCAtMy4wODU5MzcgLTMuNDc2NTYyIC0zLjA4NTkzNyBsLTcuMDg5ODQ0IDAgbDAgMjMuMzM5ODQ0IGwtNS4yNzM0MzcgMCB6IE0zMjQuOTgwNDY5IDM4LjgyODEyNSBjLTIuNDA4ODQ4IDAuOTExNDY1IC01LjE0MzIyMyAxLjM2NzE4OCAtOC4yMDMxMjUgMS4zNjcxODggYy0xMC4wMjYwMzUgMCAtMTUuMDM5MDYyIC00Ljg1MDI1NCAtMTUuMDM5MDYyIC0xNC41NTA3ODEgYzAgLTkuMTc5Njg3IDUuMDEzMDI3IC0xMy43Njk1MzEgMTUuMDM5MDYzIC0xMy43Njk1MzEgYzMuMDU5OTAyIDAgNS43OTQyNzcgMC40NTU3MjMgOC4yMDMxMjUgMS4zNjcxODggbDAgNC42ODc1IGMtMi40MDg4NDggLTEuMDQxNjYgLTUuMDEzMDA4IC0xLjU2MjUgLTcuODEyNDggLTEuNTYyNSBjLTYuNzA1NzIzIDAgLTEwLjA1ODU5NCAzLjA5MjQ0MSAtMTAuMDU4NTk0IDkuMjc3MzQ0IGMwIDYuNzA1NzIzIDMuMzUyODcxIDEwLjA1ODU5NCAxMC4wNTg1OTQgMTAuMDU4NTk0IGMyLjc5OTQ3MyAwIDUuNDAzNjMzIC0wLjUyMDg0IDcuODEyNDggLTEuNTYyNSBsMCA0LjY4NzUgeiBNMzI5Ljg2MzI4MiA0MCBsMCAtMjcuOTI5Njg3IGw1LjE3NTc4MSAwIGwwIDExLjUyMzQzOCBsMTMuNzY5NTMxIDAgbDAgLTExLjUyMzQzNyBsNS4xNzU3ODEgMCBsMCAyNy45Mjk2ODggbC01LjE3NTc4MSAwIGwwIC0xMS45MTQwNjIgbC0xMy43Njk1MzEgMCBsMCAxMS45MTQwNjMgbC01LjE3NTc4MSAwIHoiLz48L2c+PGcgaWQ9IlN2Z2pzRzEwMDkiIGZlYXR1cmVLZXk9Im5hbWVGZWF0dXJlLTEiIHRyYW5zZm9ybT0ibWF0cml4KDIuNTYwNzMxMzUxNzMzMTU3LDAsMCwyLjU2MDczMTM1MTczMzE1NywtNS4wMDEzNzk1NzkyNzkzOTUsMjE0LjU5MTMxNTE5ODE2ODc2KSIgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTI1LjE5NTMxMyAzOC43MTA5MzggYy0yLjI1MjU5OCAwLjk4OTU5IC01LjA3MTY0MSAxLjQ4NDM3NSAtOC40NTcwNTEgMS40ODQzNzUgYy05Ljg1Njc3NyAwIC0xNC43ODUxNTYgLTQuODUwMjU0IC0xNC43ODUxNTYgLTE0LjU1MDc4MSBjMCAtOS4xNzk2ODcgNS4wMTMwMjcgLTEzLjc2OTUzMSAxNS4wMzkwNjMgLTEzLjc2OTUzMSBjMy4wNTk5MDIgMCA1Ljc5NDI3NyAwLjQ1NTcyMyA4LjIwMzEyNSAxLjM2NzE4OCBsMCA0LjY4NzUgYy0yLjQwODg0OCAtMS4wNDE2NiAtNS4wMTMwMDggLTEuNTYyNSAtNy44MTI0OCAtMS41NjI1IGMtNi43MDU3MjMgMCAtMTAuMDU4NTk0IDMuMDkyNDQxIC0xMC4wNTg1OTQgOS4yNzczNDQgYzAgNi43MDU3MjMgMy4xNjQwNjMgMTAuMDU4NTk0IDkuNDkyMTg4IDEwLjA1ODU5NCBjMC45Mzc1IDAgMi4wMDUyMTUgLTAuMTU2MjUgMy4yMDMxMjUgLTAuNDY4NzUgbDAgLTguMTI1IGw1LjE3NTc4MSAwIGwwIDExLjYwMTU2MyB6IE0zMC4wNzgxMjYgMzkuOTYwOTM4IGwwIC0yNy44OTA2MjUgbDEyLjY5NTMxMyAwIGM1LjcwMzEyNSAwIDguNTU0Njg4IDIuNDkzNDk2IDguNTU0Njg4IDcuNDgwNDY5IGMwIDMuMzcyNDAyIC0yLjIyMDA1OSA2LjE2NTM3MSAtNi42NjAxNTYgOC4zNzg5MDYgbDguODQ3NjU2IDEyLjA3MDMxMyBsLTYuNTIzNDM3IDAgbC04LjQ5NjA5NCAtMTIuMTY3OTY5IGwwIC0yLjM2MzI4MSBjNC45NDc5MSAtMC44NDYzNDggNy40MjE4NzUgLTIuNzY2OTE0IDcuNDIxODc1IC01Ljc2MTY5OSBjMCAtMi4wNTcyODUgLTEuMTU4ODQ4IC0zLjA4NTkzNyAtMy40NzY1NjIgLTMuMDg1OTM3IGwtNy4wODk4NDQgMCBsMCAyMy4zMzk4NDQgbC01LjI3MzQzNyAwIHogTTY5LjAwMzkwNyAzNS43MDMxMjUgYzUuNjI1IDAgOC40Mzc1IC0zLjI0ODY5MSA4LjQzNzUgLTkuNzQ2MDk0IGMwIC02LjM5MzIyMyAtMi44MTI1IC05LjU4OTg0NCAtOC40Mzc1IC05LjU4OTg0NCBjLTUuNzY4MjIzIDAgLTguNjUyMzQ0IDMuMTk2NjIxIC04LjY1MjM0NCA5LjU4OTg0NCBjMCA2LjQ5NzQwMiAyLjg4NDEyMSA5Ljc0NjA5NCA4LjY1MjM0NCA5Ljc0NjA5NCB6IE01NC45ODA0NjkgMjYuMDc0MjE5IGMwIC05LjQ2NjE1MiA0LjY3NDQ1MyAtMTQuMTk5MjE5IDE0LjAyMzQxOCAtMTQuMTk5MjE5IGM5LjIwNTcyMyAwIDEzLjgwODU5NCA0LjczMzA2NiAxMy44MDg1OTQgMTQuMTk5MjE5IGMwIDkuNDE0MDYzIC00LjYwMjg3MSAxNC4xMjEwOTQgLTEzLjgwODU5NCAxNC4xMjEwOTQgYy04LjkzMjI4NSAwIC0xMy42MDY3NTggLTQuNzA3MDMxIC0xNC4wMjM0MTggLTE0LjEyMTA5NCB6IE04Ny42OTUzMTMgMjkuMDIzNDM4IGwwIC0xNi45NTMxMjUgbDUuMTc1NzgxIDAgbDAgMTYuOTUzMTI1IGMwIDQuNDUzMTI1IDIuMjc4NjUyIDYuNjc5Njg4IDYuODM1OTM4IDYuNjc5Njg4IHM2LjgzNTkzOCAtMi4yMjY1NjIgNi44MzU5MzggLTYuNjc5Njg3IGwwIC0xNi45NTMxMjUgbDUuMTc1NzgxIDAgbDAgMTYuOTUzMTI1IGMwIDcuNDQ3OTEgLTQuMDAzOTA2IDExLjE3MTg3NSAtMTIuMDExNzE5IDExLjE3MTg3NSBzLTEyLjAxMTcxOSAtMy43MjM5NjUgLTEyLjAxMTcxOSAtMTEuMTcxODc1IHogTTExNy41NzgxMjYgNDAgbDAgLTI3LjkyOTY4NyBsMTIuNSAwIGM1LjcwMzEyNSAwIDguNTU0Njg4IDIuNjIzNjkxIDguNTU0Njg4IDcuODcxMDk0IGMwIDUuNjkwMDk4IC0zLjg5OTc0NiA5LjEzNDEwMiAtMTEuNjk5MjE5IDEwLjMzMjAxMiBsLTAuNzQyMTg3IC00LjYwOTM3NSBjNC42ODc1IC0wLjg0NjM0OCA3LjAzMTI1IC0yLjcwMTgxNiA3LjAzMTI1IC01LjU2NjQwNiBjMCAtMi4zMTc3MTUgLTEuMTU4ODQ4IC0zLjQ3NjU2MiAtMy40NzY1NjIgLTMuNDc2NTYyIGwtNi45OTIxODcgMCBsMCAyMy4zNzg5MDYgbC01LjE3NTc4MSAwIHoiLz48L2c+CgkJCTwvZz4KCQk8L3N2Zz4KCQ==" alt="Jasurda Search Group" width="3171" height="2893">
         </a>
-        <p class="footer-brand__tagline">Boutique Construction &amp; Manufacturing Recruiters</p>
+        <p class="footer-brand__tagline">Boutique Construction, Manufacturing, Sales &amp; Finance Search</p>
         <p>Boston-based. National Reach.</p>
       </div>
 
