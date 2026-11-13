@@ -524,6 +524,47 @@
   @media (max-width: 460px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
   @media (max-width: 380px) { .footer-brand__tagline { white-space: normal; } }
 
+  /* ===== Jobs (cream band; cards sit on the darker page tone so they lift off the band) ===== */
+  .job-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: clamp(1.25rem, 3vw, 1.75rem); }
+  .job-filter {
+    font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--body); background: transparent; border: 1px solid var(--border); border-radius: var(--radius-pill);
+    padding: .5rem .95rem; cursor: pointer; transition: color var(--t-fast), border-color var(--t-fast), background-color var(--t-fast);
+  }
+  .job-filter span { color: var(--muted); margin-left: .25rem; }
+  .job-filter:hover { color: var(--heading); border-color: var(--heading); }
+  .job-filter.is-on { background: var(--sky); border-color: var(--sky); color: var(--navy); font-weight: 700; }
+  .job-filter.is-on span { color: var(--navy); }
+  .jobs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 1.5rem); align-items: start; }
+  @media (max-width: 980px) { .jobs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .jobs-grid { grid-template-columns: 1fr; } }
+  .job { background: var(--bg); padding: 1.4rem; display: flex; flex-direction: column; gap: .8rem; min-width: 0; }
+  .job[hidden] { display: none; }
+  .job:hover { border-color: color-mix(in srgb, var(--pink) 45%, var(--border)); }
+  .job__top { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+  .job__date { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .job h3 { font-size: 1.12rem; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.2; }
+  .job__meta { font-size: .85rem; line-height: 1.7; color: var(--body); }
+  .job__meta span { white-space: nowrap; }
+  .job__meta .job__loc { white-space: normal; }
+  .job__pay { color: var(--sky); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .job__details summary {
+    cursor: pointer; list-style: none; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--accent-ink); display: inline-flex; align-items: center; gap: .4rem;
+  }
+  .job__details summary::-webkit-details-marker { display: none; }
+  .job__details summary::after { content: "+"; font-size: 1rem; line-height: 1; }
+  .job__details[open] summary::after { content: "–"; }
+  .job__desc { margin-top: .85rem; padding-top: .85rem; border-top: 1px solid var(--border); font-size: .9rem; color: var(--body); }
+  .job__desc p { margin-top: .7rem; }
+  .job__desc p:first-child { margin-top: 0; }
+  .job__desc strong, .job__desc b { color: var(--heading); }
+  .job__desc ul, .job__desc ol { margin: .4rem 0 0; padding-left: 1.1rem; list-style: disc; }
+  .job__desc li { margin-top: .25rem; }
+  .job__actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; margin-top: auto; padding-top: .4rem; }
+  .job__actions .btn { padding: .65rem 1.3rem; font-size: .82rem; }
+  .jobs-empty { text-align: center; color: var(--muted); }
+
   /* ===== Reveal ===== */
   html.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
   html.js .reveal.in { opacity: 1; transform: none; }
@@ -542,6 +583,7 @@
       <a href="#roles">Practices</a>
       <a href="#industries">Industries</a>
       <a href="#approach">Employers</a>
+      <a href="#jobs">Jobs</a>
       <a href="#candidates">Candidates</a>
       <a href="#meet">Contact</a>
     </nav>
@@ -556,6 +598,7 @@
           <a href="#roles">Practices</a>
           <a href="#industries">Industries</a>
           <a href="#approach">Employers</a>
+          <a href="#jobs">Jobs</a>
           <a href="#candidates">Candidates</a>
           <a href="#meet">Contact</a>
           <a href="mailto:aj@jasurdagroup.com?subject=Starting%20a%20search">Start a search</a>
@@ -650,6 +693,7 @@
       <div class="disc reveal">
         <div class="disc__head">
           <h3>Engineering &amp; Manufacturing</h3>
+          <span class="badge badge--primary">Core</span>
         </div>
         <p class="disc__desc">Engineers of every discipline, plus quality and plant operations leaders, for manufacturers and design firms.</p>
       </div>
@@ -657,6 +701,7 @@
       <div class="disc reveal">
         <div class="disc__head">
           <h3>Industrial Sales</h3>
+          <span class="badge badge--primary">Core</span>
         </div>
         <p class="disc__desc">Sales engineers, account managers, territory and channel sellers, and sales managers for industrial companies.</p>
       </div>
@@ -812,6 +857,161 @@
     </div>
   </section>
 
+  <!-- JOBS (generated: run `node update-jobs.js` to refresh from SourceWhale) -->
+  <!-- JOBS:START -->
+  <!-- Generated by update-jobs.js on 2026-11-12. Edit the script, not this block. -->
+  <section class="section band--cream" id="jobs">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Open roles</span>
+        <h2>Searches we're <span class="hl">running now</span></h2>
+        <p>Every role below is a live search AJ is working personally. Client names stay confidential until we talk.</p>
+      </div>
+        <div class="job-filters reveal" role="group" aria-label="Filter openings by function">
+          <button type="button" class="job-filter is-on" data-fn="all" aria-pressed="true">All <span>8</span></button>
+          <button type="button" class="job-filter" data-fn="legal" aria-pressed="false">Legal <span>4</span></button>
+          <button type="button" class="job-filter" data-fn="engineering" aria-pressed="false">Engineering <span>1</span></button>
+          <button type="button" class="job-filter" data-fn="finance-and-accounting" aria-pressed="false">Finance &amp; Accounting <span>1</span></button>
+          <button type="button" class="job-filter" data-fn="manufacturing" aria-pressed="false">Manufacturing <span>1</span></button>
+          <button type="button" class="job-filter" data-fn="operations" aria-pressed="false">Operations <span>1</span></button>
+        </div>
+        <div class="jobs-grid">
+        <article class="job card" data-fn="finance-and-accounting" id="job-4ddf4b3f-2bab-4763-8e09-ccd58c17832f">
+          <div class="job__top">
+            <span class="badge">Finance &amp; Accounting</span>
+            <span class="job__date">Posted Nov 11</span>
+          </div>
+          <h3>Construction Controller / Director of Client Advisory</h3>
+          <div class="job__meta"><span class="job__loc">United States, Eastern Time zone schedule</span>&nbsp;&middot; <span>Remote</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$125K–$160K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p><strong>Location: </strong>Remote</p><p>** Candidates must reside in one of the following states: Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island, Vermont, New Jersey, New York, Pennsylvania, Delaware, Maryland, Washington DC. **</p><p><strong>About the Role</strong></p><p>A growing accounting and advisory firm serving construction contractors is seeking a full-time, permanent Controller to lead its most complex client accounts.  This is not your traditional construction controller role. The job is advisory and client-facing. You will lead client meetings, explain WIP and job cost results to owners, and tell them plainly what the numbers say about pricing, overhead, and profitability. You will also direct a bookkeeping team to carry out the work.  This is a full-time direct-hire position with the firm, not a contract or fractional engagement.</p><p><strong>Responsibilities</strong></p><ul><li>Manage relationships with complex construction and contracting clients.</li><li>Lead client meetings and present financial results clearly, including WIP reports, estimates versus actuals, and cost-to-completion analysis.</li><li>Analyze job costing, overhead, pricing, and profitability, and recommend practical improvements to business owners.</li><li>Direct bookkeeping and accounting team members on required actions and follow-up.</li><li>Develop advisory reporting and dashboards beyond standard QuickBooks Online output.</li><li>Serve as the primary point of coordination between clients and the internal team.</li></ul><p><strong>Qualifications</strong></p><ul><li>7+ years experience in construction accounting or construction finance, including WIP reporting, job costing, and cost-to-completion analysis.</li><li>Demonstrated ability to hold direct, constructive conversations with business owners about financial results.</li><li>Ability to lead and prioritize the work of accounting staff without performing all bookkeeping personally.</li><li>Strong judgment, analytical ability, and communication skills.</li><li>CPA licensure preferred, but is not required.</li><li>Bachelor&rsquo;s degree in accounting, finance, or a related field.</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=4ddf4b3f-2bab-4763-8e09-ccd58c17832f" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Construction%20Controller%20%2F%20Director%20of%20Client%20Advisory">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="legal" id="job-ba7ca2b5-8d82-4fb9-9731-136bb5a420dd">
+          <div class="job__top">
+            <span class="badge">Legal</span>
+            <span class="job__date">Posted Nov 7</span>
+          </div>
+          <h3>Medical Malpractice Defense Attorney</h3>
+          <div class="job__meta"><span class="job__loc">Boston, MA</span>&nbsp;&middot; <span>Hybrid</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$135K–$165K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p>A premier Northeast litigation defense firm is seeking a mid-level Associate Attorney for its growing Medical Malpractice and Long-Term Care Defense Litigation Team in Boston. Associates work alongside AV-rated attorneys on a diverse, challenging caseload in a collaborative environment that rewards meaningful contributions. The role offers real responsibility, mentorship from experienced partners, and room to grow. You will manage a diverse caseload from start to finish.</p><p><strong>Responsibilities</strong></p><ul><li>Draft status reports, pleadings, motions, and discovery requests, and meet critical deadlines</li><li>Prepare for and participate in depositions, hearings, and trials</li><li>Take and defend depositions and manage the discovery process</li><li>Draft and argue dispositive motions</li><li>Develop litigation strategy with clients, experts, and colleagues</li><li>Work alongside partners on complex, high-value matters</li><li>Conduct legal research and prepare memoranda</li></ul><p><strong>Qualifications</strong></p><ul><li>JD from an ABA-accredited law school</li><li>Admission to the Massachusetts Bar</li><li>2 to 8 years of civil litigation experience, including Massachusetts state and federal courts</li><li>Experience taking and defending depositions and managing discovery</li><li>Self-starter with strong advocacy skills</li><li>Ability to draft and argue dispositive motions, with strong legal research and discovery skills</li><li>Preferred: medical malpractice, healthcare, or long-term care defense experience</li></ul><p><strong>Work Environment and Benefits</strong></p><ul><li>Hybrid schedule, with 2 days remote</li><li>Medical, dental, and vision coverage</li><li>Short- and long-term disability, and life insurance</li><li>401(k) and FSA</li><li>12 paid holidays and flexible PTO</li><li>Parental and military leave</li><li>Associate education program</li><li>Mobile phone stipend, discount program, and identity theft protection</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=ba7ca2b5-8d82-4fb9-9731-136bb5a420dd" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Medical%20Malpractice%20Defense%20Attorney">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="legal" id="job-67d022e3-9080-4b2e-8b43-cad7b97a54e0">
+          <div class="job__top">
+            <span class="badge">Legal</span>
+            <span class="job__date">Posted Nov 7</span>
+          </div>
+          <h3>Civil Litigation Defense Attorney</h3>
+          <div class="job__meta"><span class="job__loc">Boston, MA</span>&nbsp;&middot; <span>Hybrid</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$120K–$150K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p><strong>Location:</strong> Boston, MA (hybrid, 2 days in the office)</p><p><strong>Position Overview</strong><br>A premier Northeast litigation defense firm is seeking an Associate Attorney for its Boston office. The role handles a diverse range of complex civil litigation, including general liability, professional liability, commercial litigation, and insurance coverage disputes. Associates work alongside AV-rated attorneys in a collaborative environment that rewards meaningful contributions. The firm is looking for a skilled litigator with strong advocacy, analytical, and case management abilities. Coverage experience is a plus. You will own your caseload from inception to resolution.</p><p><strong>Responsibilities</strong></p><ul><li>Draft pleadings, dispositive motions, and other substantive legal documents.</li><li>Manage discovery, including taking and defending depositions.</li><li>Prepare for and attend hearings and trials.</li><li>Work with clients, experts, partners, and senior attorneys on litigation strategy.</li><li>Provide clients with regular updates and interim status reports.</li><li>Conduct legal research and prepare memoranda.</li></ul><p><strong>Qualifications</strong></p><ul><li>JD from an ABA-accredited law school.</li><li>Admission to the Massachusetts Bar.</li><li>2 to 8 years of civil litigation experience, including Massachusetts state and federal courts.</li><li>Strong research, analytical, writing, and oral advocacy skills.</li><li>Ability to manage multiple matters and deadlines, both independently and as part of a team.</li><li>Sound judgment and strong communication skills.</li><li>Insurance coverage litigation or policy interpretation experience is a plus.</li></ul><p><strong>Work Environment and Benefits</strong></p><ul><li>Hybrid schedule, with 2 days remote.</li><li>Medical, dental, and vision coverage.</li><li>Short- and long-term disability, and life insurance.</li><li>401(k) and FSA.</li><li>12 paid holidays and flexible PTO.</li><li>Parental and military leave.</li><li>Associate education program.</li><li>Mobile phone stipen</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=67d022e3-9080-4b2e-8b43-cad7b97a54e0" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Civil%20Litigation%20Defense%20Attorney">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="legal" id="job-0a74b53b-21e9-4255-882a-683474b6a16b">
+          <div class="job__top">
+            <span class="badge">Legal</span>
+            <span class="job__date">Posted Nov 7</span>
+          </div>
+          <h3>Civil Litigation Associate</h3>
+          <div class="job__meta"><span class="job__loc">Boston, MA</span>&nbsp;&middot; <span>Hybrid</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$125K–$165K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p>A premier Northeast litigation defense firm is seeking a mid-level Associate Attorney for its Boston office. The role sits in a trial practice focused on defending premises liability, trucking, construction, employment, and product liability matters. Associates work alongside AV-rated attorneys on a diverse, challenging caseload in a collaborative environment that rewards meaningful contributions. You will own your caseload from inception to resolution.</p><p><strong>Responsibilities</strong></p><ul><li>Draft pleadings, motions, and discovery requests, and meet all deadlines.</li><li>Prepare for and attend depositions, hearings, and trials.</li><li>Take and defend fact witness and expert depositions.</li><li>Draft and argue dispositive motions.</li><li>Work with clients, experts, partners, and senior attorneys on litigation strategy.</li><li>Provide clients with regular updates and interim status reports.</li><li>Conduct legal research and prepare memoranda.</li></ul><p><strong>Qualifications</strong></p><ul><li>JD from an ABA-accredited law school.</li><li>Admission to the Massachusetts Bar.</li><li>2 to 8 years of civil litigation experience, including Massachusetts state and federal courts.</li><li>Self-starter with strong advocacy skills.</li><li>Ability to draft and argue dispositive motions, with strong legal research and discovery skills.</li><li>Detail-oriented, with strong communication skills.</li></ul><p><strong>Work Environment and Benefits</strong></p><ul><li>Hybrid schedule, with 2 days remote.</li><li>Medical, dental, and vision coverage.</li><li>Short- and long-term disability, and life insurance.</li><li>401(k) and FSA.</li><li>12 paid holidays and flexible PTO.</li><li>Parental and military leave.</li><li>Associate education program.</li><li>Mobile phone stipend, discount program, and identity theft protection.</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=0a74b53b-21e9-4255-882a-683474b6a16b" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Civil%20Litigation%20Associate">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="legal" id="job-e639cf3d-7007-4352-b5e5-bcdf52ac7c2a">
+          <div class="job__top">
+            <span class="badge">Legal</span>
+            <span class="job__date">Posted Nov 7</span>
+          </div>
+          <h3>Automobile &amp; Premises Liability Defense Attorney</h3>
+          <div class="job__meta"><span class="job__loc">New York, NY</span>&nbsp;&middot; <span>Hybrid</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$150K–$180K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p><strong>Position Overview</strong><br>A premier Northeast litigation defense firm is seeking a full-time Associate Attorney to defend automobile and premises liability matters in New York. Associates work alongside AV-rated attorneys on a diverse, challenging caseload in a collaborative environment that rewards meaningful contributions. You will own your caseload from inception through resolution.</p><p><strong>Responsibilities</strong></p><ul><li>Draft pleadings, motions, and discovery requests, and meet all court deadlines</li><li>Take and defend fact witness and expert depositions</li><li>Prepare, file, and argue dispositive motions</li><li>Handle arbitrations and mediations (ADR)</li><li>Prepare comprehensive written status reports for insurers</li><li>Attend hearings and trials</li><li>Work with clients, experts, partners, and senior attorneys on litigation strategy</li><li>Conduct legal research and prepare strategic memoranda</li></ul><p><strong>Qualifications</strong></p><ul><li>JD from an ABA-accredited law school</li><li>Admission to the New York State Bar</li><li>2 to 8 years of civil litigation experience defending automobile and premises liability cases in New York</li><li>Ability to draft and argue dispositive motions, perform legal research, and respond to discovery</li><li>Independently takes and defends fact and expert depositions</li><li>Prior ADR experience (arbitrations and mediations)</li><li>Experience writing status reports for insurance carriers</li></ul><p><strong>Work Environment and Benefits</strong></p><ul><li>Hybrid schedule, with 2 days in the office</li><li>Medical, dental, and vision coverage</li><li>401(k) and life insurance</li><li>HSA and FSA</li><li>Flexible PTO</li><li>Mobile phone reimbursement</li><li>Associate education program</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=e639cf3d-7007-4352-b5e5-bcdf52ac7c2a" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Automobile%20%26%20Premises%20Liability%20Defense%20Attorney">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="manufacturing" id="job-af263aab-6ef1-4cbc-930e-f6e5a43178e2">
+          <div class="job__top">
+            <span class="badge">Manufacturing</span>
+            <span class="job__date">Posted Nov 7</span>
+          </div>
+          <h3>Maintenance Technician</h3>
+          <div class="job__meta"><span class="job__loc">Baltimore, MD</span>&nbsp;&middot; <span>On-site</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$62.4K–$68K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p><strong>Location:</strong> Baltimore, MD</p><p>We are partnered with a leading building products manufacturer that needs a skilled Maintenance Technician who can diagnose problems fast and fix them. You will keep production running and take on capital projects that improve how the plant operates.</p><p><strong>Responsibilities</strong></p><ul><li>Troubleshoot and repair mechanical, electrical, hydraulic, pneumatic, and boiler systems.</li><li>Diagnose and maintain PLCs, HMIs, servo drives, and motors.</li><li>Calibrate controls and instruments.</li><li>Install, dismantle, and modify equipment for capital projects and process improvements.</li><li>Run and audit preventive maintenance, and keep ERP records up to date.</li><li>Work with vendors and engineers to resolve technical issues.</li><li>Follow PSM, NFPA 70E/arc flash, and site safety standards.</li></ul><p><strong>Qualifications</strong></p><ul><li>High school diploma, GED, or technical school.</li><li>3 to 5 years of industrial maintenance experience.</li><li>Strong AC/DC electrical troubleshooting and PLC experience.</li><li>Background with rotating equipment, hydraulics, and pneumatics.</li><li>Boiler operator certification, or able to get one.</li><li>Welding (gas and arc) and forklift skills.</li><li>Plumbing and carpentry experience is a plus.</li></ul><p><strong>What&rsquo;s Offered</strong></p><ul><li>Tuition reimbursement</li><li>Profit sharing through stock options and cash bonuses</li><li>Traditional or Roth 401(k) with company match</li><li>Generous PTO and parental leave</li></ul><p><strong>Additional Information</strong></p><ul><li>Employment Type: Full-time, permanent placement</li><li>Schedule: Monday through Friday, 8:00 AM to 5:00 PM, with occasional weekends</li><li>Hourly Pay Rate: $29.00 to $33.00, depending on experience and qualifications</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=af263aab-6ef1-4cbc-930e-f6e5a43178e2" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Maintenance%20Technician">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="operations" id="job-fad33078-ba15-4582-ac7e-bcb39b862989">
+          <div class="job__top">
+            <span class="badge">Operations</span>
+            <span class="job__date">Posted Oct 27</span>
+          </div>
+          <h3>Director of Operations</h3>
+          <div class="job__meta"><span class="job__loc">Matawan, NJ</span>&nbsp;&middot; <span>On-site</span>&nbsp;&middot; <span>Full-time</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p><strong>About the Role</strong><br>A fast-growing non-asset freight brokerage is hiring a Director of Operations to lead its entire operations team and build the structure that takes it through its next stage of growth.This is a hands-on leadership seat, not an executive role managing from above. You will run daily operations, hold one-on-ones, develop your people, set expectations, fix process, and step into escalations when a load goes sideways.</p><p><strong>Key Responsibilities</strong></p><ul><li>Lead the full brokerage operations team: carrier sales, dispatch, and load management.</li><li>Run daily operations and keep freight moving on time and on margin.</li><li>Hold regular one-on-ones, coach and develop reps, and set clear performance expectations.</li><li>Build the processes, KPIs, and onboarding that let the operation scale.</li><li>Own carrier procurement and capacity management.</li><li>Step into escalations with carriers and customers and resolve them.</li><li>Get the most out of the TMS and load board tools, and improve how the team uses them.</li></ul><p><strong>Qualifications</strong></p><ul><li>5+ years in freight brokerage operations, ideally at a non-asset brokerage.</li><li>Came up through the floor: carrier sales or dispatch, booking trucks, negotiating rates, managing loads.</li><li>3+ years leading people, including brokerage operations teams.</li><li>Track record of building systems or processes that made an operation run better.</li><li>Strong carrier procurement and capacity management experience.</li><li>TMS experience, plus Highway, Descartes, DAT, Truckstop, or similar.</li><li>Lives in New Jersey within a reasonable daily commute of the office.</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=fad33078-ba15-4582-ac7e-bcb39b862989" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Director%20of%20Operations">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        <article class="job card" data-fn="engineering" id="job-c74c0748-b53f-424d-9bd3-53ed2eae671b">
+          <div class="job__top">
+            <span class="badge">Engineering</span>
+            <span class="job__date">Posted Sep 23</span>
+          </div>
+          <h3>Structural Engineer</h3>
+          <div class="job__meta"><span class="job__loc">Dallas TX, Memphis TN</span>&nbsp;&middot; <span>Hybrid</span>&nbsp;&middot; <span>Full-time</span>&nbsp;&middot; <span class="job__pay">$90K–$140K</span></div>
+          <details class="job__details">
+            <summary>View details</summary>
+            <div class="job__desc"><p>Our client is a national leader in the engineering and fabrication of steel and concrete structures for the electric utility industry, serving transmission, distribution, and substation applications. They are seeking a Structural Engineer to lead the analysis and design of tubular steel transmission structures, working closely with customers, project management, and fabrication teams to deliver accurate, code-compliant designs from concept through construction.</p><p><strong>What you'll do</strong></p><ul><li>Analyze and design tubular steel transmission structures and associated products in accordance with project design criteria and applicable industry standards</li><li>Review customer specifications and coordinate design revisions with project management, modeling, and estimating teams</li><li>Prepare design calculations, cost estimates, and complete engineering documentation</li><li>Communicate directly with customers and plant personnel to resolve technical questions and design ambiguities</li><li>Review drawings for design conformance and perform quality checks on peer-designed work</li><li>Support resolution of technical issues arising in fabrication and the field</li></ul><p><strong>What you'll need</strong></p><ul><li>Bachelor of Science in Civil Engineering with a background in structural design, or equivalent experience</li><li>5+ years of relevant design experience</li><li>EIT required</li><li>Proficiency with structural design software</li><li>Strong written and verbal communication skills; ability to work independently and collaboratively</li><li>US Citizen or Green Card Holder</li></ul><p><strong>Benefits</strong></p><ul><li>Medical, dental, and vision coverage</li><li>Life, AD&amp;D, and disability insurance</li><li>401(k) with company match and flexible spending accounts</li><li>Tuition reimbursement and leadership development programs</li><li>Paid holidays, vacation, and sick leave</li><li>Salary of $90,000 - $140,000 depending on experience and qualifications</li><li>Hybrid flexibility (2x remote / 3x onsite)</li><li>Backed by an established, publicly traded infrastructure company with a long-standing industry presence</li></ul></div>
+          </details>
+          <div class="job__actions">
+            <a class="btn btn--primary" href="https://sourcewhale.app/shared/jobs?team=amFzdXJkYS1zZWFyY2gtZ3JvdXA&amp;jobId=c74c0748-b53f-424d-9bd3-53ed2eae671b" target="_blank" rel="noopener">Apply</a>
+            <a class="textlink" href="mailto:aj@jasurdagroup.com?subject=Question%20about%3A%20Structural%20Engineer">Ask AJ &rarr;</a>
+          </div>
+        </article>
+        </div>
+      <div class="section-cta">
+        <a class="btn btn--outline" href="mailto:aj@jasurdagroup.com?subject=R%C3%A9sum%C3%A9%20submission">Don't see your role? Send your résumé</a>
+      </div>
+    </div>
+  </section>
+  <!-- JOBS:END -->
+
   <!-- CANDIDATES -->
   <section class="section" id="candidates">
     <div class="wrap">
@@ -913,6 +1113,7 @@
           <li><a href="#roles">Practices</a></li>
           <li><a href="#industries">Industries</a></li>
           <li><a href="#approach">Employers</a></li>
+          <li><a href="#jobs">Jobs</a></li>
           <li><a href="#candidates">Candidates</a></li>
           <li><a href="#meet">Contact</a></li>
         </ul>
@@ -957,6 +1158,21 @@
         a.addEventListener('click', function () { menu.removeAttribute('open'); });
       });
     }
+
+    var filters = document.querySelectorAll('.job-filter');
+    filters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var fn = btn.getAttribute('data-fn');
+        filters.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('.job').forEach(function (card) {
+          card.hidden = fn !== 'all' && card.getAttribute('data-fn') !== fn;
+        });
+      });
+    });
 
     var form = document.getElementById('contactForm');
     if (form) {
